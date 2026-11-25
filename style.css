@@ -58,3 +58,8 @@
 @keyframes af-glow{0%,100%{opacity:0}45%{opacity:.95}}
 @media(max-height:450px){.aftermath-content{gap:8px}.aftermath-card{max-height:30vh;width:auto}.aftermath-cards{min-height:30vh}.aftermath-title,.personal-title{font-size:clamp(28px,8vh,50px)}.aftermath-caption{font-size:clamp(12px,3.8vh,18px)}}
 @media(prefers-reduced-motion:reduce){.aftermath-screen *{animation-duration:.01s!important;animation-delay:0s!important}}
+
+/* v1.9: local solo UI */
+.solo-entry{display:flex;flex-wrap:wrap;gap:10px;align-items:end;margin:12px 0;padding:12px;border:1px solid #806e48;border-radius:8px}.solo-entry label{flex:1;min-width:160px}.solo-entry button{flex:1;min-width:160px}.solo-mode .chat,.solo-mode .popup-chat,.solo-mode .live-chat{display:none!important}
+
+.cpu-lobby{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0;padding:10px;border:1px solid #756548;border-radius:8px}.cpu-lobby p{flex-basis:100%;margin:0}.cpu-lobby button{flex:1;min-width:120px}
