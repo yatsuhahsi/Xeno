@@ -23,3 +23,38 @@
 .popup-pick-card.hovered,.hand .cardimg.hovered{outline:3px solid #ffda84;box-shadow:0 0 13px 3px #ffce6eaa;filter:brightness(1.13)}
 .popup-pick-card:focus-visible:not(.hovered){outline:2px dashed #cbb477;filter:none}
 .choice-popup [data-pick-hint]{min-height:2.6em;line-height:1.3;margin:5px 0}
+
+/* v1.8: shared dramatic resolution and personal elimination */
+.aftermath-screen{position:fixed;inset:0;z-index:200;display:grid;place-items:center;background:#070707;color:#f2ddad;text-align:center;padding:clamp(12px,4vw,38px);overflow:hidden;isolation:isolate;touch-action:none;pointer-events:auto;}
+.aftermath-screen.purge{background:radial-gradient(ellipse at center,#43171a,#090609 72%)}
+.aftermath-screen.revolution{background:radial-gradient(ellipse at center,#58401c,#100b06 72%)}
+.aftermath-screen[data-stage=black],.aftermath-screen[data-stage=personal]{background:#070707}
+.aftermath-content{width:min(95vw,680px);display:flex;flex-direction:column;align-items:center;gap:clamp(12px,3vh,28px)}
+.aftermath-cards{position:relative;display:flex;align-items:center;justify-content:center;gap:clamp(22px,8vw,100px);min-height:clamp(130px,32vh,290px)}
+.aftermath-card{display:block;width:clamp(86px,23vw,182px);max-height:40vh;object-fit:contain;filter:drop-shadow(0 0 14px #c5a36566);border-radius:7px;}
+.aftermath-screen[data-stage=cards] .aftermath-card{animation:af-enter .55s both}
+.aftermath-screen[data-stage=strike] .victim{animation:af-shake .35s both;filter:drop-shadow(0 0 20px #d84a37)}
+.aftermath-screen[data-stage=fall] .victim{animation:af-fall .7s both}
+.aftermath-crack{position:absolute;right:0;top:50%;transform:translateY(-50%);width:clamp(86px,23vw,182px);height:auto;pointer-events:none;filter:drop-shadow(0 0 6px #e6b16c);}
+.aftermath-screen[data-stage=fall] .aftermath-crack{animation:af-fall .7s both}
+.aftermath-slash{position:absolute;left:-12%;right:-12%;top:50%;height:5px;transform:rotate(-23deg);background:#ffe4aa;box-shadow:0 0 18px 9px #d64e37;animation:af-slash .4s both;}
+.aftermath-screen.revolution .aftermath-slash{box-shadow:0 0 18px 9px #d6a94d}
+.aftermath-card.boy{animation:af-enter .5s both}
+.morph-hero{position:absolute;animation:af-hero .7s .35s both}
+.morph-boy{animation:af-boy .7s .15s both}
+.awaken-light{position:absolute;inset:-35%;pointer-events:none;background:radial-gradient(ellipse,#fff2b9aa,#d8a64244 36%,transparent 67%);animation:af-glow .95s both;mix-blend-mode:screen;}
+.aftermath-title,.personal-title{font-family:Georgia,'Yu Mincho',serif;font-weight:900;font-size:clamp(40px,11vw,82px);letter-spacing:.15em;margin:0;text-shadow:0 0 22px #d7b15d88;line-height:1.2;animation:af-enter .4s both}
+.purge .aftermath-title{color:#ec6b5c;text-shadow:0 0 25px #c83232aa}
+.revolution .aftermath-title{color:#f6d480}
+.personal-title{color:#c2c2c2;text-shadow:none;font-size:clamp(38px,10vw,70px)}
+.aftermath-caption{font-size:clamp(14px,3.8vw,24px);line-height:1.8;white-space:pre-line;margin:0;color:#e8dcc6;text-shadow:0 2px 5px #000;overflow-wrap:anywhere}
+[data-stage=personal] .aftermath-caption{color:#9a9a9a;font-size:clamp(13px,3vw,18px)}
+@keyframes af-enter{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:scale(1)}}
+@keyframes af-shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px) rotate(-4deg)}75%{transform:translateX(7px) rotate(4deg)}}
+@keyframes af-fall{0%{opacity:1;filter:brightness(1)}35%{filter:brightness(1.7)}100%{opacity:0;transform:translateY(32px) rotate(9deg) scale(.82);filter:brightness(.2)}}
+@keyframes af-slash{0%{opacity:0;scale:0 1}30%{opacity:1;scale:1 1}100%{opacity:0;scale:1 1}}
+@keyframes af-hero{from{opacity:0;filter:brightness(2)}to{opacity:1;filter:brightness(1)}}
+@keyframes af-boy{from{opacity:1;filter:brightness(1)}to{opacity:0;filter:brightness(2)}}
+@keyframes af-glow{0%,100%{opacity:0}45%{opacity:.95}}
+@media(max-height:450px){.aftermath-content{gap:8px}.aftermath-card{max-height:30vh;width:auto}.aftermath-cards{min-height:30vh}.aftermath-title,.personal-title{font-size:clamp(28px,8vh,50px)}.aftermath-caption{font-size:clamp(12px,3.8vh,18px)}}
+@media(prefers-reduced-motion:reduce){.aftermath-screen *{animation-duration:.01s!important;animation-delay:0s!important}}
