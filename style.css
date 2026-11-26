@@ -63,3 +63,61 @@
 .solo-entry{display:flex;flex-wrap:wrap;gap:10px;align-items:end;margin:12px 0;padding:12px;border:1px solid #806e48;border-radius:8px}.solo-entry label{flex:1;min-width:160px}.solo-entry button{flex:1;min-width:160px}.solo-mode .chat,.solo-mode .popup-chat,.solo-mode .live-chat{display:none!important}
 
 .cpu-lobby{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0;padding:10px;border:1px solid #756548;border-radius:8px}.cpu-lobby p{flex-basis:100%;margin:0}.cpu-lobby button{flex:1;min-width:120px}
+
+/* v2.2: target selection and public, rank-free reveal */
+.target-effect-card{display:block;width:auto;height:clamp(72px,17dvh,130px);max-width:100%;object-fit:contain;margin:8px auto 12px;border-radius:6px;box-shadow:0 4px 12px #0008}
+.popup-target-list{display:grid;gap:8px;margin:10px 0;grid-template-columns:1fr}
+.popup-target-button{display:flex;justify-content:space-between;align-items:center;gap:8px;min-height:44px;text-align:left;overflow-wrap:anywhere}
+.popup-target-button small{color:#e5bf78;flex-shrink:0;font-size:11px}
+.popup-target-button.chosen{outline:2px solid #ffda84;background:#66512e}
+.public-reveal{pointer-events:none;overflow:hidden}
+.public-reveal .guess-result-content{width:min(92%,430px);gap:10px;padding:10px;box-sizing:border-box}
+.public-reveal-names,.public-reveal-cards{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;justify-items:center;gap:clamp(8px,3vw,22px);width:100%}
+.public-reveal-names>span:not(.public-reveal-arrow){font-weight:bold;overflow-wrap:anywhere;font-size:clamp(14px,4vw,23px)}
+.public-reveal-arrow{font-size:clamp(22px,6vw,36px);color:#e5c57e}
+.public-reveal-cell{display:flex;flex-direction:column;align-items:center;gap:5px;font-size:clamp(11px,2.8vw,15px)}
+.public-reveal-card{width:clamp(65px,20vw,125px);max-height:min(30vh,175px);object-fit:contain;border-radius:6px;box-shadow:0 0 18px #b99b5355;animation:guess-reveal .35s both}
+.public-reveal-note{font-size:clamp(14px,3.6vw,20px);font-weight:bold}.public-reveal-wait{font-size:12px;color:#d4c29b}
+.mobile-popup-typing .target-effect-card{height:clamp(25px,calc(var(--visible-height,320px) - 260px),52px);margin:0 auto}.mobile-popup-typing .popup-target-list{gap:3px;margin:2px 0}.mobile-popup-typing .popup-target-button{min-height:30px;padding:4px 8px;font-size:12px}
+
+/* Static forced-discard observer panel: no live card locations, animations or highlights. */
+.public-reveal-pair{display:flex;justify-content:center;align-items:center;gap:5px;min-width:0;width:100%}
+.forced-observer{background:radial-gradient(ellipse,#30291f,#080b09)}
+.forced-observer .guess-result-content{width:min(96%,510px)}
+.forced-observer .public-reveal-cards{grid-template-columns:minmax(0,1fr) auto minmax(0,2fr);gap:clamp(5px,2vw,14px)}
+.forced-observer .public-reveal-card{width:clamp(46px,13vw,105px);max-width:100%;animation:none}
+.forced-observer .public-reveal-pair .public-reveal-card{width:min(46%,105px);min-width:0}
+/* Final public choice: show a strong outline and a text label, not just color. */
+.effect-result .guess-result-content{gap:8px;max-width:98%;padding:8px}
+.effect-result .result-pair{align-items:start;gap:8px}
+.effect-result .result-card-cell{display:flex;flex-direction:column;align-items:center;gap:6px;min-width:0;flex:1}
+.effect-result .result-pair .public-reveal-card{width:100%;max-width:105px;animation:none}
+.effect-result .discarded img,.effect-result .lose img{outline:3px solid #ff7770;outline-offset:2px;box-shadow:0 0 20px #ff524d88}
+.effect-result .retained img{opacity:.65}
+.result-card-label{font-size:clamp(10px,2.5vw,14px);font-weight:bold;white-space:nowrap;color:#e6dfca}
+.discarded .result-card-label{color:#ff9d95}
+.effect-result .win img{outline:3px solid #e6cb79;outline-offset:2px;box-shadow:0 0 20px #e6cb7988}
+.result-duel-label{font:bold clamp(21px,5vw,34px) Georgia,serif}.result-duel-label.win{color:#f7d984}.result-duel-label.lose{color:#ff9d95}
+.effect-result .result-duel{animation:none;max-width:100%;gap:clamp(8px,3vw,24px)}
+.effect-result .result-duel img{animation:none}
+
+/* v2.4: brief rebirth reveal; never show the new hand rank. */
+.aftermath-screen.rebirth{background:radial-gradient(ellipse at center,#2c4b3bea,#101912e8 62%,#090d0be8);}
+.rebirth .aftermath-content{gap:clamp(8px,2vh,18px)}
+.rebirth .aftermath-title{font-size:clamp(32px,9vw,64px);color:#e9d9a4;text-shadow:0 0 18px #b9e7c780;letter-spacing:.12em}
+.rebirth-cards{display:flex;align-items:center;justify-content:center;gap:clamp(14px,5vw,42px)}
+.rebirth-card{width:clamp(64px,17vw,115px);max-height:32vh;object-fit:contain;border-radius:7px;box-shadow:0 0 22px #cce9a866}
+.rebirth-hero{animation:rebirth-fade .85s both}
+.rebirth-reserve{animation:rebirth-rise 1s both}
+.rebirth-arrow{font-size:clamp(22px,5vw,38px);color:#e8d59d}
+.short-rebirth .rebirth-card{animation-duration:.28s}
+@keyframes rebirth-fade{0%{opacity:1;filter:brightness(1)}60%{filter:brightness(1.6)}100%{opacity:.5;filter:brightness(1)}}
+@keyframes rebirth-rise{0%{opacity:.15;transform:translateY(12px)}60%{opacity:1;filter:brightness(1.45)}100%{opacity:1;transform:translateY(0);filter:brightness(1)}}
+@media(max-height:450px){.rebirth .aftermath-title{font-size:clamp(24px,8vh,42px)}.rebirth-card{width:auto;max-height:28vh}}
+@media(prefers-reduced-motion:reduce){.rebirth-card{animation:none!important}}
+
+/* v2.5: in-field target selection (no modal). */
+#targetPrompt{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:4;width:max-content;max-width:38%;padding:9px 7px;text-align:center;pointer-events:none;background:#14221aee;border:1px solid #d2b477;border-radius:10px;box-shadow:0 3px 18px #0008;color:#ffe5ad;line-height:1.35;overflow-wrap:anywhere}
+#targetPrompt strong{display:block;font-size:clamp(13px,2.3vw,22px)}#targetPrompt small{display:block;font-size:clamp(11px,1.6vw,14px);margin-top:4px;color:#e5d3ac}
+.choosing-target #center{opacity:.2}.choosing-target .player-name.target-candidate{border:2px solid #f6d58a;background:#5b4928;color:#fff0c7;box-shadow:0 0 12px #e3b65c77;min-height:38px;touch-action:manipulation;cursor:pointer}.choosing-target .player-name.target-candidate:disabled{cursor:default;opacity:.55}.choosing-target .player-name.target-unavailable{opacity:.55;cursor:default}.choosing-target .guard .player-name.target-candidate{border-style:dashed}.choosing-target .player-name.target-candidate:hover:not(:disabled),.choosing-target .player-name.target-candidate:focus-visible{background:#806436;outline:2px solid #ffe1a0;outline-offset:2px}
+@media(max-width:600px){#targetPrompt{max-width:38%;padding:7px 4px}.choosing-target .player-name.target-candidate{min-height:44px;padding:4px 6px}}

@@ -1,6 +1,6 @@
 // Two-player imperfect-information rollouts. Input: public snapshot + own private snapshot + observations only.
-import {counts,model,rank,decideWeak,random,newMemory,observe} from './cpu.js?v=2.1';
-import {act,views,timeout} from './engine.js?v=2.1';
+import {counts,model,rank,decideWeak,random,newMemory,observe} from './cpu.js?v=2.5';
+import {act,views,timeout} from './engine.js?v=2.5';
 const sum=a=>a.reduce((a,b)=>a+b,0), clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
 const seq=()=>Array.from({length:10},(_,i)=>i+1);
 const sample=(w,r)=>{let x=r()*sum(w);for(let i=1;i<11;i++){x-=w[i]||0;if(x<0)return i}return w.findLastIndex(x=>x>0)};
@@ -106,7 +106,7 @@ function multiRoll(s,u,a,mem,r){
  for(let i=0;i<100;i++){
   if(s.phase==='end')return s.winner===u?1:!s.winner&&s.players[u].alive?.5:0;
   if(!s.players[u].alive)return 0;
-  if(['aftermath','guessResult'].includes(s.phase)){timeout(s,Math.max(++tick,s.deadline));continue;}
+  if(['aftermath','guessResult','effectResult'].includes(s.phase)){timeout(s,Math.max(++tick,s.deadline));continue;}
   v=views(s);for(const id of s.order)observe(memories[id],v.public,v.private[id],id);
   const id=s.phase==='duel'?[s.turn,s.target].find(x=>!s.ack?.[x]):s.actor;if(!id)return 0;
   let next=decideWeak(v.public,v.private[id],id,memories[id],r);
